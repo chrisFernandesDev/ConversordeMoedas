@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Conversor de Moedas</string>
+    <string name="meeda_texto_tirulo">Escolha a opção de moeda</string>
+
+    <string-array name="moedas_lista_A">
+        <item>Dolar</item>
+        <item>Real</item>
+    </string-array>
+
+</resources>
