@@ -18,23 +18,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <Spinner
-        android:id="@+id/spinner_a"
-        android:layout_width="200dp"
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner_a"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/text_opcao_moeda"/>-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner_b"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/spinner_a"/>-->
+
+    <EditText
+        android:id="@+id/opcao_a"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_opcao_moeda"/>
 
-    <Spinner
-        android:id="@+id/spinner_b"
-        android:layout_width="200dp"
+    <EditText
+        android:id="@+id/opcao_b"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_a"/>
+        app:layout_constraintTop_toBottomOf="@id/opcao_a"/>
+
+    <EditText
+        android:id="@+id/valor_digitado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/opcao_b"/>
+
 
     <Button
         android:id="@+id/btn_calcular"
@@ -44,7 +72,7 @@
         android:text="Calcular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_b"
+        app:layout_constraintTop_toBottomOf="@id/valor_digitado"
         />
 
 
