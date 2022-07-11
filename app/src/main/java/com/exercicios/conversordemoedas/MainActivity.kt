@@ -139,16 +139,22 @@ class MainActivity : AppCompatActivity() {
         if (spinnerSelecionadoA.equals("Dolar") && spinnerSelecionadoB.equals("Real")) {
             respostaSpinner = 1
             return respostaSpinner
+        }else if (spinnerSelecionadoA.equals("Real") && spinnerSelecionadoB.equals("Dolar")){
+            respostaSpinner = 2
+            return respostaSpinner
+        }else if (spinnerSelecionadoA.equals("Euro") && spinnerSelecionadoB.equals("Dolar")){
+            respostaSpinner = 3
+            return respostaSpinner
+        }else if (spinnerSelecionadoA.equals("Dolar") && spinnerSelecionadoB.equals("Euro")){
+            respostaSpinner = 4
+            return respostaSpinner
+        }else if (spinnerSelecionadoA.equals("Real") && spinnerSelecionadoB.equals("Euro")){
+            respostaSpinner = 5
+            return respostaSpinner
+        }else if (spinnerSelecionadoA.equals("Euro") && spinnerSelecionadoB.equals("Real")){
+            respostaSpinner = 6
+            return respostaSpinner
         }
-
-//        spinnerA.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-//
-//            override fun onItemSelected(spinnerA: AdapterView<*>, v: View, arg2: Int, arg3: Long) {
-//            }
-//            override fun onNothingSelected(arg0: AdapterView<*>?) {
-//            }
-//        })
-
         return 0
     }
 
