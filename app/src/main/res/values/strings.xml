@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">Conversor de Moedas</string>
     <string name="meeda_texto_tirulo">Escolha a opção de moeda</string>
+    <string name="digite_o_valor">Digite o valor</string>
+    <string name="calcular">Calcular</string>
 
     <string-array name="moedas_lista_A">
         <item>Dolar</item>
         <item>Real</item>
+        <item>Euro</item>
     </string-array>
 
 </resources>
