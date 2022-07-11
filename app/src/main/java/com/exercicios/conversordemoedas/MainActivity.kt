@@ -1,40 +1,37 @@
 package com.exercicios.conversordemoedas
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.EditText
+import android.text.TextUtils.*
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
-    lateinit var respostaUserA: EditText
-    lateinit var respostaUserB: EditText
+    lateinit var respostaUserA: Spinner
+    lateinit var respostaUserB: Spinner
     lateinit var valorDigitado: EditText
+    lateinit var respostaAoUser: TextView
     lateinit var btnCalcular: Button
 
-    var opcaoUserA: Int = 0
-    var opcaoUserB: Int = 0
+    var valorDigitadoUser: Double = 0.0
+    var opcaoUser: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        respostaUserA = findViewById(R.id.opcao_a)
-        respostaUserB = findViewById(R.id.opcao_b)
-        valorDigitado = findViewById(R.id.valor_digitado)
-
-//        opcaoUserA = Integer.parseInt(respostaUserA.toString())
-//        opcaoUserB = Integer.parseInt(respostaUserB.toString())
-
-        btnCalcular = findViewById(R.id.btn_calcular)
+        pegaView()
+        defineSpinner()
 
         btnCalcular.setOnClickListener {
-            calcularDolarParaReal()
 
-            Log.d("Calculo", calcularDolarParaReal().toString())
+            mensagemNaoDigitado()
+
+            spinnerSelecionado()
+
         }
     }
-
 
     //Interface - Contrato do Cambio
     interface Cambio {
@@ -55,25 +52,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class RealDolar : Cambio{
+    class RealDolar : Cambio {
         override fun calcular(valorCambio: Double): Double {
             return valorCambio * 0.18
         }
     }
 
-    class EuroDolar : Cambio{
+    class EuroDolar : Cambio {
         override fun calcular(valorCambio: Double): Double {
             return valorCambio * 1.02
         }
     }
 
-    class RealEuro : Cambio{
+    class RealEuro : Cambio {
         override fun calcular(valorCambio: Double): Double {
             return valorCambio * 0.18
         }
     }
 
-    class EuroReal : Cambio{
+    class EuroReal : Cambio {
         override fun calcular(valorCambio: Double): Double {
             return valorCambio * 5.43
         }
@@ -81,10 +78,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Função
-    fun calcularDolarParaReal(): Double {
-        val userDigitou = 50.0
-        opcaoUserA = 6
-        return when (opcaoUserA) {
+    fun pegaView() {
+        respostaUserA = findViewById(R.id.spinner_a)
+        respostaUserB = findViewById(R.id.spinner_b)
+        valorDigitado = findViewById(R.id.valor_digitado)
+        btnCalcular = findViewById(R.id.btn_calcular)
+        respostaAoUser = findViewById(R.id.resposta_para_user)
+    }
+
+    fun calcularMoedaParaMoeda(): Double {
+        val userDigitou = valorDigitadoUser
+        opcaoUser = spinnerSelecionado()
+        return when (opcaoUser) {
             1 -> DolarReal().calcular(userDigitou)
             2 -> RealDolar().calcular(userDigitou)
             3 -> EuroDolar().calcular(userDigitou)
@@ -92,8 +97,67 @@ class MainActivity : AppCompatActivity() {
             5 -> RealEuro().calcular(userDigitou)
             6 -> EuroReal().calcular(userDigitou)
             else -> {
-                return 0.0;
+                return 1.0;
             }
+        }
+    }
+
+    fun defineSpinner() {
+
+        val spinnerA = respostaUserA
+        val spinnerB = respostaUserB
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.moedas_lista_A,
+            R.layout.spinner_text
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.spinner_drop)
+            spinnerA.adapter = adapter
+        }
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.moedas_lista_A,
+            R.layout.spinner_text
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.spinner_drop)
+            spinnerB.adapter = adapter
+        }
+    }
+
+    fun spinnerSelecionado(): Int {
+
+        val spinnerA = respostaUserA
+        val spinnerB = respostaUserB
+
+        val spinnerSelecionadoA = spinnerA.selectedItem
+        val spinnerSelecionadoB = spinnerB.selectedItem
+
+        var respostaSpinner: Int = 0
+
+        if (spinnerSelecionadoA.equals("Dolar") && spinnerSelecionadoB.equals("Real")) {
+            respostaSpinner = 1
+            return respostaSpinner
+        }
+
+//        spinnerA.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+//
+//            override fun onItemSelected(spinnerA: AdapterView<*>, v: View, arg2: Int, arg3: Long) {
+//            }
+//            override fun onNothingSelected(arg0: AdapterView<*>?) {
+//            }
+//        })
+
+        return 0
+    }
+
+    fun mensagemNaoDigitado(){
+        if (valorDigitado.text.toString().trim().isNotEmpty()){
+            valorDigitadoUser = valorDigitado.text.toString().toDouble()
+            respostaAoUser.setText(calcularMoedaParaMoeda().toString())
+        }else{
+            Toast.makeText(this, "Digite um valor a ser convertido", Toast.LENGTH_SHORT).show()
         }
     }
 }
